@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+<% title = @resource.relationships.prefLabels_for_this_locale.first.object.literal %>
+<% if @resource.archetype.name == 'ConceptScheme' %>
+  <%= title %>
+<% elsif @resource.archetype.name == 'Domain' %>
+  [implement this!] / <%= title %>
+<% elsif @resource.archetype.name == 'MicroThesaurus' %>
+  <% domain_title = @resource.relationships.resourceGroup('domain').first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
+  [implement this!] / <%= domain_title %> / <%= title %>
+<% else %>
+  <% domain_title = @resource
+                      .relationships
+                      .resourceGroup('domain').inspect
+                      %>
+  <% mt_title = @resource.relationships.resourceGroup('MicroThesaurus').inspect %>
+  [implement this!] / <%= domain_title %> / <%= mt_title %> / <%= title %>
+<% end %>
+[<%= link_to 'JSON', '/c/' + @resource.literal + '.json' %>]<hr>
+<% @resource.relationships.resourceGroup('prefLabel').each do |relationship| %>
+  [<%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>]
+  <%= link_to relationship.object.literal, '/c/' + @resource.literal + "?locale=#{relationship.object.language.name}" %>
+  [<%= relationship.object.language.name %>]<br>
+<% end %>
+<% @resource.relationships.resourceGroup('scopeNote').each do |relationship| %>
+  [<%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>]
+  <%= relationship.object.literal %>
+  [<%= relationship.object.language.name %>]<br>
+<% end %>
+<% @resource.relationships.resourceGroup('broader').each do |relationship| %>
+  <%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>
+  <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal  + "?locale=#{I18n.locale}" %><br>
+<% end %>
+<% @resource.relationships.resourceGroup('narrower').each do |relationship| %>
+  <%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>
+  <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" %><br>  
+<% end %>
+<% @resource.relationships.resourceGroup('related').each do |relationship| %>
+  <%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>
+  <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" %><br>
+<% end %>
+<% @resource.relationships.resourceGroup('domain').each do |relationship| %>
+  [<%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>]
+  <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" %><br>
+<% end %>
+<% @resource.relationships.resourceGroup('microthesaurus').each do |relationship| %>
+  [<%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>]
+  <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" %><br>
+<% end %>
+<% unless @resource.literal == '00' %>
+  <% @resource.relationships.resourceGroup('hasTopConcept').each do |relationship| %>
+    [<%= relationship.predicate.namespace.name + ":" + relationship.predicate.name %>]
+    <%= link_to relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" %><br>
+  <% end %>
+<% end %>
+<%= link_to 'Edit', edit_resource_path(@resource.literal) %> |
+<%= link_to 'Back', resources_path %>

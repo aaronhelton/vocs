@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  archetype_id: 1
+  literal: MyString
+
+two:
+  archetype_id: 1
+  literal: MyString
