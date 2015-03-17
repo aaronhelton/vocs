@@ -3,17 +3,27 @@
 <% if @resource.archetype.name == 'ConceptScheme' %>
   <%= title %>
 <% elsif @resource.archetype.name == 'Domain' %>
-  [implement this!] / <%= title %>
+  <% cs_title = @resource.relationships.resourceGroup('inScheme')
+        .first.object.relationships.prefLabels_for_this_locale
+        .first.object.literal %>
+  <%= cs_title %> / <%= @resource.literal + " - " + title %>
 <% elsif @resource.archetype.name == 'MicroThesaurus' %>
-  <% domain_title = @resource.relationships.resourceGroup('domain').first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
-  [implement this!] / <%= domain_title %> / <%= title %>
+  <% domain_title = @resource.relationships.resourceGroup('domain')
+                    .first.object.relationships.prefLabels_for_this_locale
+                    .first.object.literal %>
+  <% cs_title = @resource.relationships.resourceGroup('domain')
+                .first.object.relationships.resourceGroup('inScheme')
+                .first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
+  <%= cs_title %> / <%= @resource.relationships.resourceGroup('domain').first.object.literal + " - " + domain_title %> / <%= @resource.literal + " - " + title %>
 <% else %>
-  <% domain_title = @resource
-                      .relationships
-                      .resourceGroup('domain').inspect
-                      %>
-  <% mt_title = @resource.relationships.resourceGroup('MicroThesaurus').inspect %>
-  [implement this!] / <%= domain_title %> / <%= mt_title %> / <%= title %>
+  <% domain_title = @resource.relationships.resourceGroup('domain')
+                    .first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
+  <% mt_title = @resource.relationships.resourceGroup('microthesaurus')
+                .first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
+  <% cs_title = @resource.relationships.resourceGroup('domain')
+                .first.object.relationships.resourceGroup('inScheme')
+                .first.object.relationships.prefLabels_for_this_locale.first.object.literal %>
+  <%= cs_title %> / <%= domain_title %> / <%= mt_title %> / <%= title %>
 <% end %>
 [<%= link_to 'JSON', '/c/' + @resource.literal + '.json' %>]<hr>
 <% @resource.relationships.resourceGroup('prefLabel').each do |relationship| %>
