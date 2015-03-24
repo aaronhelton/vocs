@@ -6,7 +6,7 @@ class ResourcesController < ApplicationController
   def index
     # Not sure if this can be ambiguated; Perhaps a supertype of which ConceptScheme and other root nodes is warranted.
     # However, this works in preventing a ruinous Resource.all query.
-    @resources = Resource.only('ConceptScheme')
+    @resources = Resource.only('Domain')
   end
 
   # GET /resources/1

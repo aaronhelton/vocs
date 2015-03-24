@@ -8,19 +8,22 @@
   </thead>
 
   <tbody>
-    <% @resources.each do |resource| %>
+    <% @resources.sort_by { |r| r.literal }.each do |resource| %>
       <tr>
         <td>
           <%= resource.archetype.namespace.name + ":" + resource.archetype.name %>
-          <%= link_to resource.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + resource.literal %>
+          <%= link_to resource.literal + " - " + resource.relationships.prefLabels_for_this_locale.first.object.literal, '/c/' + resource.literal %>
         </td>
+        <!--
         <td><%= link_to 'Show', '/c/' + resource.literal %></td>
         <td><%= link_to 'Edit', edit_resource_path(resource) %></td>
         <td><%= link_to 'Destroy', resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        -->
       </tr>
     <% end %>
   </tbody>
 </table>
 <br>
-
+<!--
 <%= link_to 'New Resource', new_resource_path %>
+-->
