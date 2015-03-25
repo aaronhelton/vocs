@@ -11,17 +11,17 @@ module ResourcesHelper
       trail = Hash.new
       trail[:c] = { :label => @resource.relationships.resourceGroup('inScheme').first.object.relationships.prefLabels_for_this_locale.first.object.literal,
                     :literal => @resource.relationships.resourceGroup('inScheme').first.object.literal } 
-      trail[:d] = { :label => @resource.relationships.prefLabels_for_this_locale.first.object.literal,
+      trail[:d] = { :label => @resource.literal + " - " + @resource.relationships.prefLabels_for_this_locale.first.object.literal,
                     :literal => @resource.literal } 
       trails << trail
     elsif @resource.archetype.name == 'MicroThesaurus'
       trail = Hash.new
       trail[:c] = { :label => @resource.relationships.resourceGroup('domain').first.object.relationships.resourceGroup('inScheme').first.object.relationships.prefLabels_for_this_locale.first.object.literal,
-                    :literal => '' }
-      trail[:d] = { :label => @resource.relationships.resourceGroup('domain').first.object.relationships.prefLabels_for_this_locale.first.object.literal,
-                    :literal => '' }
-      trail[:m] = { :label => @resource.relationships.prefLabels_for_this_locale.first.object.literal,
-                    :literal => '' }
+                    :literal => @resource.relationships.resourceGroup('domain').first.object.relationships.resourceGroup('inScheme').first.object.literal }
+      trail[:d] = { :label => @resource.relationships.resourceGroup('domain').first.object.literal + " - " + @resource.relationships.resourceGroup('domain').first.object.relationships.prefLabels_for_this_locale.first.object.literal,
+                    :literal => @resource.relationships.resourceGroup('domain').first.object.literal }
+      trail[:m] = { :label => @resource.literal + " - " + @resource.relationships.prefLabels_for_this_locale.first.object.literal,
+                    :literal => @resource.literal }
       trails << trail
     else
       # Concepts can belong to more than one microthesaurus, thus there can be more than one trail

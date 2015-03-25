@@ -34,7 +34,7 @@
         <% label = relationship.object.literal + " - " %>
       <% end %>
       <% tc_array << {  :predicate => relationship.predicate.namespace.name + ":" + relationship.predicate.name, 
-                      :label => label + relationship.object.relationships.prefLabels_for_this_locale.inspect, #.first.object.literal, 
+                      :label => label + relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, 
                       :uri => '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" } %>
     <% end %>
     <% if tc_array.size > 0 %>
