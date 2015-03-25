@@ -1,15 +1,17 @@
 <p id="notice"><%= notice %></p>
 <% trails = my_trails %>
 <% trails.each do |trail| %>
-  <%= link_to trail[:c][:label], '/c/' + trail[:c][:literal] %>
+  <% if trail[:c] %>
+    <%= link_to trail[:c][:label], '/c/' + trail[:c][:literal] + "?locale=#{I18n.locale}" %>
+  <% end %>
   <% if trail[:d] %>
-    / <%= link_to trail[:d][:label], '/c/' + trail[:d][:literal] %>
+    / <%= link_to trail[:d][:label], '/c/' + trail[:d][:literal] + "?locale=#{I18n.locale}" %>
   <% end %>
   <% if trail[:m] %>
-    / <%= link_to trail[:m][:label], '/c/' + trail[:m][:literal] %>
+    / <%= link_to trail[:m][:label], '/c/' + trail[:m][:literal] + "?locale=#{I18n.locale}" %>
   <% end %>
   <% if trail[:t] %>
-    / <%= link_to trail[:t][:label], '/c/' + trail[:t][:literal] %>
+    / <%= link_to trail[:t][:label], '/c/' + trail[:t][:literal] + "?locale=#{I18n.locale}" %>
   <% end %>
   <br>
 <% end %>
@@ -32,8 +34,8 @@
         <% label = relationship.object.literal + " - " %>
       <% end %>
       <% tc_array << {  :predicate => relationship.predicate.namespace.name + ":" + relationship.predicate.name, 
-                      :label => label + relationship.object.relationships.prefLabels_for_this_locale.first.object.literal, 
-                      :uri => '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" }%>
+                      :label => label + relationship.object.relationships.prefLabels_for_this_locale.inspect, #.first.object.literal, 
+                      :uri => '/c/' + relationship.object.literal + "?locale=#{I18n.locale}" } %>
     <% end %>
     <% if tc_array.size > 0 %>
       <% sorted = tc_array.sort_by { |t| t[:label] } %>
