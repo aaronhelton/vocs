@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227195353) do
+ActiveRecord::Schema.define(version: 20150326105354) do
 
   create_table "archetypes", force: true do |t|
     t.integer  "namespace_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150227195353) do
 
   create_table "resources", force: true do |t|
     t.integer  "archetype_id"
-    t.string   "literal"
+    t.text     "literal",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "language_id"
