@@ -1,24 +1,14 @@
+Vocs is a Rails based vocabulary/ontology server platform. It is intended to serve a variety of RDF-compliant schemas, but is currently optimized for SKOS. The dataset underlying it as a demonstration of functionality is the UN's UNBIS Thesaurus, for which it was primarily developed.
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+I will attempt to maintain a demonstration of the most current functionality here: https://floating-eyrie-8967.herokuapp.com/
 
+There are lots of things left to do:
 
-Welcome to your Rails project on Cloud9 IDE!
-
-To get started, just do the following:
-
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://vocs2-aaronhelton.c9.io/).
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+1. Loosen coupling between Vocs and SKOS to accommodate additional schemas
+2. Develop a user authentication and basic security model
+3. Implement a search engine
+4. Develop administration/management tools to maintain resources
+5. Improve performance with better caching (low priority)
+6. Construct additional output formats
+7. Develop a term proposal, review, and approval workflow
+8. Theming
