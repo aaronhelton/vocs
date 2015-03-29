@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root 'resources#index'
+  root 'archetypes#index'
   #resources :resources, path: 'c', param: :id
   resources :resources, path: 'c', param: :literal
+  resources :archetypes, path: 't', param: :name
   get 'by_label/:literal' => 'resources#by_label'
   
   #get 'concepts/:id' => 'concepts#show'

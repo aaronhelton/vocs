@@ -38,6 +38,10 @@ gem 'i18n'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'bonsai-elasticsearch-rails'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -45,7 +49,7 @@ end
 
 
 group :production do
-  gem 'pg'
+  gem 'mysql'
   gem 'rails_12factor', '0.0.2'
 end
 
