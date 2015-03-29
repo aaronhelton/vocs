@@ -70,7 +70,7 @@ GEM
     minitest (5.5.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
-    mysql (2.9.1)
+    mysql2 (0.3.18)
     rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -139,7 +139,7 @@ DEPENDENCIES
   i18n
   jbuilder (~> 2.0)
   jquery-rails
-  mysql
+  mysql2
   rails (= 4.1.6)
   rails_12factor (= 0.0.2)
   sass-rails (~> 4.0.3)
